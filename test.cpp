@@ -1,41 +1,55 @@
-#include "c-echo.h"
+nclude "c-echo.h"
+#include "c-count.h"
 
 #include "gtest/gtest.h"
 
 TEST(EchoTest, HelloWorld) {
-	char* test_val[3]; test_val[0] = "./c-echo"; test_val[1] = "hello"; test_val[2] = "world";
+	char* test_val[3]; test_val[0] = "./c-echo-count"; test_val[1] = "hello"; test_val[2] = "world";
 	EXPECT_EQ("hello world", echo(3, test_val));
 }
 
 TEST(EchoTest, EmptyString) {
-	char* test_val[1]; test_val[0] = "./c-echo";
+	char* test_val[1]; test_val[0] = "./c-echo-count";
 	EXPECT_EQ("", echo(1,test_val));
 }
 
 TEST(EchoTest, AllUpperCase) {
-	char* test_val[3]; test_val[0] = "./c-echo"; test_val[1] = "HELLO"; test_val[2] = "WORLD";
+	char* test_val[3]; test_val[0] = "./c-echo-count"; test_val[1] = "HELLO"; test_val[2] = "WORLD";
 	EXPECT_EQ("HELLO WORLD", echo(3, test_val));
 }
 
 TEST(EchoTest, SpecialCharacters) {
-	char* test_val[2]; test_val[0] = "./c-echo"; test_val[1] = "!@#$%^&*()";
+	char* test_val[2]; test_val[0] = "./c-echo-count"; test_val[1] = "!@#$%^&*()";
 	EXPECT_EQ("!@#$%^&*()", echo(2, test_val));
 }
 
 TEST(EchoTest, TabCharacter) {
-	char* test_val[3]; test_val[0] = "./c-echo"; test_val[1] = "Hello	"; test_val[2] = "	World	";
+	char* test_val[3]; test_val[0] = "./c-echo-count"; test_val[1] = "Hello	"; test_val[2] = "	World	";
 	EXPECT_EQ("Hello	 	World	", echo(3, test_val));
 }
 
 TEST(EchoTest, NewLineCharacter) {
-	char* test_val[3]; test_val[0] = "./c-echo"; test_val[1] = "Hello\n";
+	char* test_val[3]; test_val[0] = "./c-echo-count"; test_val[1] = "Hello\n";
 test_val[2] = "\nWorld";
 	EXPECT_EQ("Hello\n \nWorld", echo(3, test_val));
 }
 
+TEST(CountTest, HelloWorld) {
+	std::string test_str = "hello world";
+	EXPECT_EQ(2, count(test_str));
+}
+
+TEST(CountTest, EmptyString) {
+	std::string test_str = "";
+	EXPECT_EQ(0, count(test_str));
+}
+
+TEST(CountTest, ManySpaces) {
+	std::string test_str = "   this   string has    weird   spacing";
+	EXPECT_EQ(5, count(test_str));
+}
 
 int main(int argc, char **argv) {
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
 }
-
