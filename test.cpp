@@ -1,4 +1,4 @@
-#include "header/c-echo.h"
+#include "c-echo.h"
 
 #include "gtest/gtest.h"
 
